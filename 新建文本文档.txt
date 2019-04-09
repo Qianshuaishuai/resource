@@ -1,0 +1,32 @@
+package main
+
+import (
+  "fmt"
+	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
+	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/requests"
+)
+
+func main() {
+  client, err := sdk.NewClientWithAccessKey("cn-hangzhou", "<accessKeyId>", "<accessSecret>")
+	if err != nil {
+		panic(err)
+	}
+
+	request := requests.NewCommonRequest()
+  request.Method = "POST"
+  request.Scheme = "https" // https | http
+	request.Domain = "dysmsapi.aliyuncs.com"
+	request.Version = "2017-05-25"
+  request.ApiName = "SendSms"
+  request.QueryParams["RegionId"] = "cn-hangzhou"
+  request.QueryParams["PhoneNumbers"] = "15602335027"
+  request.QueryParams["SignName"] = "ÖÐÄÏÝ¼Ó¢"
+  request.QueryParams["TemplateCode"] = "SMS_162738761"
+  request.QueryParams["TemplateParam"] = "{\"code\":\"1111\"}"
+	
+	response, err := client.ProcessCommonRequest(request)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Print(response.GetHttpContentString())
+}
