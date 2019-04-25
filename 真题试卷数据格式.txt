@@ -1,0 +1,79 @@
+type PaperSimple struct {
+	PaperID        int    `gorm:"column:F_paper_id"`
+	Name           string `gorm:"column:F_name"`
+	ShortName      string `gorm:"column:F_short_name"`
+	PaperType      int    `gorm:"column:F_paper_type"`
+	Difficulty     int    `gorm:"column:F_difficulty"`
+	FullScore      int    `gorm:"column:F_full_score"`
+	Date           string `gorm:"column:F_date"`
+	Semester       int    `gorm:"column:F_semester_id"`
+	CourseID       int    `gorm:"column:F_course_id"`
+	ReferenceCount int    `gorm:"column:F_reference_count"`
+	BrowseCount    int    `gorm:"column:F_browse_count"`
+	ResourceType   int    `gorm:"column:F_resource_type"`
+}
+
+type PaperSet struct {
+	SetID       int    `gorm:"column:F_set_id"`
+	PaperID     int    `gorm:"column:F_paper_id"`
+	Name        string `gorm:"column:F_paper_name"`
+	QuestionIDs string `gorm:"column:F_question_ids"`
+}
+
+type PaperSetChapter struct {
+	Name          string  `gorm:"column:F_name"`
+	Detail        string  `gorm:"column:F_detail"`
+	QuestionCount int     `gorm:"column:F_question_count"`
+	Time          int     `gorm:"column:F_time"`
+	PresetScore   float64 `gorm:"column:F_preset_score"`
+	SetID         int     `gorm:"column:F_set_id"`
+	ChapterID     int     `gorm:"column:F_chapter_id"`
+}
+
+type QuestionSimple struct {
+	QuestionID          int    `gorm:"column:F_question_id"`
+	CourseID            int    `gorm:"column:F_course_id"`
+	Content             string `gorm:"column:F_content"`
+	Accessories         string `gorm:"column:F_accessories"`
+	Solution            string `gorm:"column:F_solution"`
+	SolutionAccessories string `gorm:"column:F_solution_accessories"`
+
+	Difficulty int     `gorm:"column:F_difficulty;" json:"difficulty"`
+	Source     string  `gorm:"column:F_source;size:80" json:"source"`   //问题的来源 试卷名称
+	Score      float64 `gorm:"column:F_score;type:FLOAT(4,1)" json:"-"` //问题分数 最大值999.9
+	ScoreInt   int     `gorm:"-" json:"score"`                          //这个问题的总分
+
+	ShortSource   string `gorm:"column:F_short_source"`
+	CorrectAnswer string `gorm:"column:F_correct_answer"`
+
+	Type         int `gorm:"column:F_type"`
+	SetID        int `gorm:"column:F_set_id"`
+	ResourceType int `gorm:"column:F_resource_type"`
+}
+
+type LargeQuestionSimple struct {
+	BigQuestionID int     `gorm:"column:F_big_question_id"`
+	Content       string  `gorm:"column:F_content"`
+	Accessories   string  `gorm:"column:F_accessories"`
+	QuestionIDs   string  `gorm:"column:F_question_ids"`
+	Score         float64 `gorm:"column:F_score"`
+}
+
+type PaperProvince struct {
+	PaperID    int `gorm:"column:paper_F_paper_id"`
+	ProvinceID int `gorm:"column:province_F_province_id"`
+}
+
+type NewOption struct {
+	Option OptionSimple `json:"option"`
+}
+
+type OptionSimple struct {
+	Options    []string `json:"options"`
+	OptionType int      `json:"optionType"`
+}
+
+type KeyPointQuestion struct {
+	KeyPointID int `gorm:"column:keypoint_F_keypoint_id"`
+	QuestionID int `gorm:"column:question_F_question_id"`
+}
