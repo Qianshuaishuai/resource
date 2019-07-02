@@ -1,0 +1,1 @@
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxead30fcd76497512&redirect_uri=http://leye.qimsj.com/tabsimple/&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect
